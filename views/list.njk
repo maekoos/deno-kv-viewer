@@ -1,0 +1,47 @@
+{% set listTabActive=true %}
+
+{% extends "_layouts/main.njk" %}
+
+{% block body %}
+<div class="mx-auto max-w-3xl px-2">
+  <h1 class="text-5xl">List</h1>
+
+
+  <form hx-post="/list/items" hx-swap="innerHTML" hx-target="#results">
+    <div class="my-4" x-data="{ value: [], realValue: {{ (prefix | dump if prefix else '[]') | dump }}, }" x-effect="
+    if(true) // avoid error??
+    try {
+      value = JSON.parse(realValue);
+      if(!Array.isArray(value)) value=[];
+    } catch(e) {
+      value = [];
+    }
+    ">
+      <label for="inputPrefix">Prefix (json array)</label>
+      <textarea id="inputPrefix" x-model="realValue" rows="1"
+        class="block w-full min-h-[40px] p-2 bg-slate-200"></textarea>
+
+      <blockquote class="my-2 ml-4 pl-2 border-l-4 opacity-80 border-slate-300">
+        <p>Interpreted as:</p>
+        <pre x-text="JSON.stringify(value, null, 2)"
+          class="overflow-auto max-h-[50vh] max-w-full font-mono text-xs p-2 bg-slate-200"></pre>
+      </blockquote>
+
+      <input type="hidden" name="prefix" :value="JSON.stringify(value)">
+    </div>
+
+    <button type="submit" class="block mt-4 px-4 py-2 bg-slate-200 hover:bg-slate-300 active:bg-slate-400">
+      Run
+    </button>
+  </form>
+
+
+  <div id="results" class="mt-10">
+    {% if prefix %}
+    {% import "list-results.njk" as listResults %}
+    {{ listResults.results(items, nextCursorUrl) }}
+    {% endif %}
+  </div>
+
+</div>
+{% endblock body %}

@@ -1,0 +1,32 @@
+{% macro _results(items) %}
+<p class="opacity-60 text-right">Limited to {{LIST_LIMIT}} results/page.</p>
+{% import "item.njk" as item %}
+{% for itm in items %}
+{{ item.small(itm) }}
+{% endfor %}
+{% endmacro %}
+
+{% macro results(items, nextCursorUrl) %}
+{% if items|length %}
+
+{% if nextCursorUrl %}
+<div class="flex justify-end">
+  <a href="{{ nextCursorUrl }}" class="p-2 bg-slate-200 hover:bg-slate-300 active:bg-slate-400">Next page</a>
+</div>
+{% endif %}
+
+{{ _results(items) if items }}
+
+{% if nextCursorUrl %}
+<div class="flex justify-end">
+  <a href="{{ nextCursorUrl }}" class="p-2 bg-slate-200 hover:bg-slate-300 active:bg-slate-400">Next page</a>
+</div>
+{% endif %}
+
+{% else %}
+<p class="my-5 opacity-90 italic">No keys matched criteria.</p>
+{% endif %}
+
+{% endmacro %}
+
+{{ results(items, nextCursorUrl) }}

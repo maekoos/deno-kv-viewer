@@ -1,0 +1,45 @@
+{% macro large(item) %}
+<div class="p-4 border border-slate-200">
+  {% if not item.value %}
+  <p>Entry not found</p>
+  {% else %}
+
+  <p class="float-right text-xs opacity-60">Versionstamp: {{ item.versionstamp }}</p>
+
+  <div class="my-2">
+    <p>Key:</p>
+    <pre class="overflow-auto max-h-[50vh] max-w-full font-mono text-sm p-2 bg-slate-200">{{ item.key | dump(2) }}</pre>
+  </div>
+
+  <div class="my-2">
+    <p>Value:</p>
+    <pre
+      class="overflow-auto max-h-[50vh] max-w-full font-mono text-sm p-2 bg-slate-200">{{ item.value | dump(2) }}</pre>
+  </div>
+
+  <div class="mt-4 flex justify-end">
+    <button hx-delete="/item?key={{ item.key | dump | urlencode }}"
+      hx-confirm="Are you sure you would like to delete the following key:{{'\n'}}{{ item.key | dump }}"
+      class="p-2 bg-red-400 hover:bg-red-500 active:bg-red-600 text-white">Delete entry</button>
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro small(item) %}
+<a href="/get?q={{ item.key |dump | urlencode }}" class="block my-2 p-4 border border-slate-200">
+  {% if not item.value %}
+  <p class="text-xl">Entry not found</p>
+  {% else %}
+
+  <p class="float-right text-xs opacity-60">Versionstamp: {{ item.versionstamp }}</p>
+
+  <div class="my-2">
+    <p>Key:</p>
+    <pre class="overflow-auto max-h-[50vh] max-w-full font-mono text-sm p-2 bg-slate-200">{{ item.key | dump(2) }}</pre>
+  </div>
+  {% endif %}
+</a>
+{% endmacro %}
+
+{{ large(item) }}

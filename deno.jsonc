@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "build-styles": "tailwindcss --minify -i ./styles/main.css -o ./styles/out.min.css",
+    "build-styles:watch": "tailwindcss --minify --watch -i ./styles/main.css -o ./styles/out.min.css",
+    "embed": "deno run -A embedder.ts",
+    "embed:watch": "deno run -A embedder.ts watch",
+    "start": "deno run --unstable --allow-net --allow-env --allow-write --allow-read main.ts",
+    "dev": "deno run --watch --unstable --allow-net --allow-env --allow-write --allow-read main.ts",
+    "compile": "deno compile --unstable --allow-net --allow-env --allow-write --allow-read main.ts",
+  }
+}

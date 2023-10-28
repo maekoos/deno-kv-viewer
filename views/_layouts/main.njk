@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>KVViewer - Inspect Deno KV databases</title>
+
+  {% include "./head.njk" %}
+</head>
+
+<body hx-boost="true" hx-target="this">
+  <nav class="border border-slate-200 shadow">
+    <div class="max-w-3xl mx-auto flex justify-normal flex-wrap">
+      <a href="/" class="flex items-center p-4 text-xl hover:bg-slate-200">
+        <img src="/static/icon.svg" alt="KvViewer" class="h-[2rem] w-auto">
+      </a>
+      <a href="/get"
+        class="flex items-center p-4 text-lg {{ 'bg-slate-200' if getTabActive else 'hover:bg-slate-300' }}">Get</a>
+      <a href="/list"
+        class="flex items-center p-4 text-lg {{ 'bg-slate-200' if listTabActive else 'hover:bg-slate-300' }}">List</a>
+    </div>
+  </nav>
+
+  <div class="my-10">
+    {% block body %}
+    content
+    {% endblock body %}
+  </div>
+</body>
+
+</html>
