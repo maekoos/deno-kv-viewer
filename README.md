@@ -2,7 +2,7 @@
 A web interface for inspecting your DenoKV databases.
 
 ```
-$ PORT=3000 DENO_KV_PATH=./kv deno run --unstable -A https://raw.githubusercontent.com/maekoos/deno-kv-viewer/main/main.ts
+$ PORT=3000 DENO_KV_PATH=./kv deno run --unstable -A https://deno.land/x/kvviewer@v0.0.1/main.ts
 ```
 
 
