@@ -1,25 +1,27 @@
-## Requirements:
+# KV-Viewer 📺
+A web interface for inspecting your DenoKV databases.
 
-1. [x] Get single value by exact key
+```
+$ PORT=3000 DENO_KV_PATH=./kv deno run --unstable -A https://raw.githubusercontent.com/maekoos/deno-kv-viewer/main/main.ts
+```
+
+
+## Features
+1. [x] Get entry by exact key
 2. [x] List entries by prefix
 3. [ ] List entries by start & end
 4. [x] Delete entry
-5. [ ] Update single value (to json - no complex javascript objects)
+5. [ ] Update single entry (json only)
+6. [ ] Set expiration date
+7. [ ] Rename single entry
+8. [ ] Inspect queues
 
-- [x] Must be able to run using `deno run https://.....` (or similar)
-  - [x] Must be compilable into a single executable
-- [x] Connect with backend using env or args (both file and remote, with access token if necessary)
-
-
-### Maybe in the future:
-
-1. [ ] Queues
-2. [ ] Expiration date
-3. [ ] Scripting? (`update itm.x+=1 on all itm.y=5 and prefix=['hello']`)
-4. [ ] Set to javascript objects - not just json
-
-- [ ] Embedding into other backends (`/admin/kv`)
+- [x] Run using a single `deno run https://...` command, or via compiled standalone executable
+- [x] Connect with remote database using env vars
+- [ ] Embedding into other backends (`/admin/kv` for example)
   - `Oak.handle`
 - [ ] Authentication
 
 
+## License
+MIT.
